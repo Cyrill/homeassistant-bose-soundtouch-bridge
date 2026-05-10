@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.1
+
+- Fix multi-architecture build. The `1.2.0` Dockerfile only pulled the
+  amd64 base image and failed on aarch64 (ARM64) Home Assistant
+  installations. Re-added `build.yaml` mapping each supported
+  architecture to its correct base image.
+- Dropped deprecated `armv7`, `armhf`, `i386` from `arch` (modern
+  Supervisor flags these). Supported architectures are now `amd64` and
+  `aarch64`.
+
 ## 1.2.0
 
 - Polished release for public use.
