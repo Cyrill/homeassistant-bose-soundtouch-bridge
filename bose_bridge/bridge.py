@@ -61,6 +61,7 @@ def load_options() -> dict:
     }
     for n in range(1, 7):
         cfg[f"preset_{n}_url"] = os.environ.get(f"PRESET_{n}_URL", "").strip()
+        cfg[f"preset_{n}_name"] = os.environ.get(f"PRESET_{n}_NAME", "").strip()
     return cfg
 
 
@@ -325,8 +326,15 @@ def main():
         if not url:
             continue
         meta = lookup_station(url)
+        override_name = (cfg.get(f"preset_{n}_name") or "").strip()
+        if override_name:
+            meta = {**meta, "name": override_name}
         presets[n] = {"url": url, **meta}
-        print(f"[meta] preset {n}: {url} -> {meta or '(no metadata found)'}")
+        print(
+            f"[meta] preset {n}: {url} -> "
+            f"{meta or '(no metadata found)'}"
+            f"{' (name override)' if override_name else ''}"
+        )
 
     av, rc = get_upnp_services(host, device_id)
 

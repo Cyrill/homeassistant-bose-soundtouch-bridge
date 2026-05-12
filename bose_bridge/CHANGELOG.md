@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.5.1
+
+- **`preset_N_name` option** (optional, per slot). When set, overrides the
+  station name auto-discovered from radio-browser.info. Useful for
+  stream URLs that aren't indexed (local Caddy/icecast proxies,
+  privately-hosted streams, etc.) — without it the speaker's display
+  shows "Internet Radio" because the addon falls back to that default
+  in the DIDL-Lite title.
+- Standalone Docker image: same option exposed as `PRESET_N_NAME` env
+  var (e.g. `PRESET_2_NAME="Energy FM"`).
+
 ## 1.5.0
 
 - **Standalone Docker image** for Home Assistant Container / plain
